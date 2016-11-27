@@ -1,0 +1,32 @@
+---
+title: "Building Text Models in R"
+author: "Nura Kawa"
+date: "November 25, 2016"
+output: html_document
+---
+
+```{r wordpress,eval=FALSE,echo=FALSE}
+# replace <password> <url> make sure chunk option is set to echo=FALSE !
+if (!require('RWordPress')){install.packages('RWordPress', repos = 'http://www.omegahat.org/R', type = 'source')}
+library(RWordPress)
+options(WordpressLogin = c(nurakawa = 'p0mpeiib@still3'), WordpressURL = 'https://nurakawa.wordpress.com/xmlrpc.php')
+library(knitr)
+# Knitr options: upload plots/images to wordpress
+opts_knit$set(upload.fun = function(file){library(RWordPress);uploadFile(file)$url;})
+# enable toc (comment out if not needed)
+library(markdown)
+options(markdown.HTML.options =  c(markdownHTMLOptions(default = T),"toc"))
+# Upload featured image / post thumbnail: option: wp_post_thumbnail=postThumbnail$id
+postThumbnail <- RWordPress::uploadFile("figure/post_thumbnail.png",overwrite = TRUE)
+postid <- knit2wp('sample-wordpress.Rmd', action = c("newPost"),title = 'RMarkdown Wordpress Template',categories=c('R'),mt_keywords = c('R','RMarkdown'),publish=FALSE) # add featured image include: wp_post_thumbnail=postThumbnail$id 
+```
+
+# Bag-of-Words
+
+
+# N-Gram
+
+```{r, n-gram}
+
+```
+
