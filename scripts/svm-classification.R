@@ -33,9 +33,9 @@ timr <- Sys.time()
 for(N in 1:4)
 {
   # load data
-  load(paste0("../data/dtms-ngrams-N-",N, ".RData"))
+  load(paste0("../data/n-gram/dtms-ngrams-N-",N, ".RData"))
   
-  print(paste("N="), N)
+  print(paste("N=", N))
   
   which_class <- matrix(NA, 
                         nrow = nrow(dtm_train), 
@@ -101,7 +101,7 @@ for(N in 1:4)
   
   print(paste0("Your Model Accuracy for SVM for N=",N, " is ", round(model_accuracy*100, 4), "%"))
   
-  f_name <- paste0("../data/SVM-model-N-",N,".RData")
+  f_name <- paste0("../data/svm-models/SVM-model-N-",N,".RData")
   
   save(svm_df,
        svm_model,
@@ -117,6 +117,11 @@ for(N in 1:4)
 
 total_runtime <- difftime(Sys.time(), timr)
 print(total_runtime)
+
+
+# =====================================================================================
+# Naive Bayes
+# =====================================================================================
 
 # the problem I encounter is too many variables. Use LASSO coefficients to select
 # variables.
@@ -151,6 +156,3 @@ print(total_runtime)
 # table(nb_preds, y_test)
 # sum(nb_preds == y_test)/length(y_test)
 # 
-# =====================================================================================
-# Logistic Regression
-# =====================================================================================

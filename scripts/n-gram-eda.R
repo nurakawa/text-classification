@@ -9,7 +9,6 @@
 # =====================================================================================
 library(wordcloud)
 
-
 # =====================================================================================
 # global environment
 # =====================================================================================
@@ -33,7 +32,7 @@ for(N in 1:4)
   print(paste0("Currently, N = ", N))
   
   # load data created in n-grams.R
-  load(paste0("../data/dtms-ngrams-N-",N, ".RData"))
+  load(paste0("../data/n-gram/dtms-ngrams-N-",N, ".RData"))
   
   # calculate overall term frequency
   most_frequent_terms <- sort(colSums(rbind(dtm_train, dtm_test)), 
