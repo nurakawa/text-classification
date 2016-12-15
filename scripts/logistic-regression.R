@@ -17,16 +17,18 @@ for(N in 1:4)
 {
   # load data created in n-grams.R
   load(paste0("../data/n-gram/dtms-ngrams-N-",N, ".RData"))
-  t
+  #t
   print(paste("Currently, N is", N))
   NFOLDS = 4
   t1 = Sys.time()
+  
+  y_train[y_train == 0] = -1
   
   glmnet_classifier = cv.glmnet(x = dtm_train,
                                 y = y_train,
                                 family = 'multinomial',
                                 
-                                # L1 penalty
+                                # L1 penalty: LASSO
                                 alpha = 1,
                                 
                                 # 5-fold cross-validation
@@ -48,13 +50,15 @@ for(N in 1:4)
                   newx = as.matrix(dtm_test),
                   type = "class")
   
+  print(preds)
+  
   
   print(paste0("Your Model Accuracy is ", round( ((sum(preds == y_test)/length(y_test))*100), 4), "%"))
   
   model_accuracy <- round( ((sum(preds == y_test)/length(y_test))*100), 4)
   
   
-  f_name <- paste0("../data/glmnet-models/model-N-",N,".RData")
+  f_name <- paste0("../data/glmnet-models/non-penalized/model-N-",N,".RData")
   
   
   
